@@ -1,12 +1,12 @@
 from flask import Flask, render_template, request, redirect, jsonify, url_for, flash
 from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker
-from models import Base, User
+from models import Base, User, Store, Product
 
 app = Flask(__name__)
 
 # Connect to Database and create database session
-engine = create_engine('sqlite:///restaurantmenuwithusers.db?check_same_thread=false')
+engine = create_engine('sqlite:///products.db')
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()

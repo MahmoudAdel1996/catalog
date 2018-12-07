@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import Base, User
+from models import Base, User, Store, Product
 
 engine = create_engine('sqlite:///products.db')
 Base.metadata.bind = engine
