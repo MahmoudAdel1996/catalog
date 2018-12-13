@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}
+Stores | Page
+{% endblock title %}
+{% block content %}
+{% include "nav.html" %}
+<div class="stores">
+    <div class="container">
+        <h2>Create New Store <a class="btn btn-info" href="{{url_for('new_store')}}">Create</a></h2>
+        {% if stores %}
+            <div class="row justify-content-center">
+            {% for store in stores %}
+                <div class="col-3 shadow p-3 mb-5 bg-white rounded box">
+                    <h3>{{store.name}}</h3>
+                    <img class="rounded" width="200px" height="150px" src="{{store.picture}}">
+                    <br><br>
+                    <p>Description: {{store.description}}</p>
+                    <p>Address: {{store.address}}</p>
+                    <p>Created By: {{store.user.name}}</p>
+                    {% if  store.user.name == userLogin %}
+                        <a class="btn btn-warning" href="{{url_for('edit_store', store_name=store.name)}}">edit</a>
+                        <a class="btn btn-danger" href="{{url_for('delete_store', store_name=store.name)}}">delete</a><br>
+                    {% endif %}
+                    <br><a class="btn btn-success" href="{{url_for('product', store_name=store.name)}}">Products</a>
+                </div>
+            {% endfor %}
+            </div>
+        {% else %}
+            <br><h5>no Stores here</h5>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

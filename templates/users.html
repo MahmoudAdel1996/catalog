@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+Users | Page
+{% endblock title %}
+{% block content %}
+{% include "nav.html" %}
+<div class="users">
+    <div class="container">
+        <div class="row justify-content-center">
+        {% for user in users %}
+            <div class="col-3 shadow p-3 mb-5 bg-white rounded box">
+                <h3>{{user.id}}: {{user.name}}</h3>
+                <img class="rounded" width="200px" height="200px" src="{{user.picture}}">
+                <br><br>
+                <p>Email: {{user.email}}</p>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,17 +1,18 @@
 import os
 import sys
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String, UniqueConstraint
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
 
 Base = declarative_base()
 
+
 class User(Base):
     __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True)
-    username = Column(String(250), nullable=False, index=True)
+    name = Column(String(250), nullable=False, index=True)
     email = Column(String(250), nullable=False)
     picture = Column(String(250), nullable=False)
 
@@ -19,20 +20,23 @@ class User(Base):
     def serialize(self):
         """Return object data in easily serializeable format"""
         return {
-            'username': self.username,
+            'name': self.name,
             'id': self.id,
             'email': self.email,
             'picture': self.picture,
         }
 
+
 class Store(Base):
-    __tablename__ = 'stor'
+    __tablename__ = 'store'
 
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
     description = Column(String(250))
     address = Column(String(250))
     picture = Column(String(250), nullable=False)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    user = relationship(User)
 
     @property
     def serialize(self):
@@ -42,7 +46,6 @@ class Store(Base):
             'id': self.id,
             'description': self.description,
             'address': self.address,
-            'picture': self.picture,
         }
 
 
@@ -55,15 +58,23 @@ class Product(Base):
     price = Column(String(8))
     type_of = Column(String(250))
     picture = Column(String(250), nullable=False)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    user = relationship(User)
+    store_id = Column(Integer, ForeignKey('store.id'))
+    store = relationship(Store)
 
     @property
     def serialize(self):
         """Return object data in easily serializeable format"""
         return {
+            'storeName': self.store.name,
             'productName': self.productName,
             'id': self.id,
             'description': self.description,
             'price': self.price,
             'type_of': self.type_of,
-            'picture': self.picture
         }
+
+
+engine = create_engine('sqlite:///products.db')
+Base.metadata.create_all(engine)

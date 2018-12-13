@@ -1,0 +1,24 @@
+<nav>
+    <ul class="clearfix">
+        <div class="nav-right">
+            <li><a href="{{ url_for('user') }}">Users</a></li>
+            <li><a href="{{ url_for('store') }}">Stores</a></li>
+        </div>
+        <div class="nav-left">
+            <i class="fas fa-store logo"></i>
+            <li>
+                {% if not userLogin %}
+                <a href="{{ url_for('login') }}" class="login">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Login</span>
+                </a>
+                {% else %}
+                <a href="{{ url_for('gdisconnect') }}" class="login">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Log Out</span>
+                </a>
+                {% endif %}
+            </li>
+        </div>
+    </ul>
+</nav>

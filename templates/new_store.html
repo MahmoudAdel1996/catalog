@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+New Store | Page
+{% endblock title %}
+{% block content %}
+{% include "nav.html" %}
+<div class="container">
+    <form class="form-group" action="{{url_for('new_store')}}" method="POST">
+        <input class="form-control" type="text" name="name" placeholder="Enter New Store">
+        <br>
+        <input class="form-control" type="text" name="description" placeholder="description">
+        <br>
+        <input class="form-control" type="text" name="adress" placeholder="Enter Address">
+        <br>
+        <input class="form-control" type="text" name="picture" placeholder="Enter url od picture">
+        <br>
+        <input class="btn btn-success" type="submit" value="Create">
+        <a class="btn btn-light" href="{{url_for('store')}}">Cancel</a>
+    </form>
+</div>
+{% endblock content %}

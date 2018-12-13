@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+Delete Store | Page
+{% endblock title %}
+{% block content %}
+{% include "nav.html" %}
+<div class="container">
+    <h3>Are You Sure You Want Delete store name {{store_name}}</h3>
+    <form action="{{ url_for('delete_store', store_name = store_name) }}" method="POST">
+        <input class="btn btn-danger" type = 'submit' value = 'Delete'>
+        <a class="btn btn-light" href ="{{ url_for('store') }}">Cancel</a>
+    </form>
+</div>
+{% endblock content %}

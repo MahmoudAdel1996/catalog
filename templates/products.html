@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+Products | Page
+{% endblock title %}
+{% block content %}
+{% include "nav.html" %}
+<div class="products">
+    <div class="container">
+        <h2>Create New Product <a class="btn btn-info" href="{{url_for('new_product', store_name=store_name)}}">Create</a></h2>
+        {% if products %}
+            <div class="row justify-content-center">
+            {% for product in products %}
+                <div class="col-3 shadow p-3 mb-5 bg-white rounded box">
+                    <h3>{{product.productName}}</h3>
+                    <img class="rounded" width="200px" height="150px" src="{{product.picture}}">
+                    <p>Description: {{product.description}}</p>
+                    <p>price: ${{product.price}}</p>
+                    <p>type_of: {{product.type_of}}</p>
+                    <p>Created By: {{product.user.name}}</p>
+                    {% if  product.user.name == userLogin %}
+                        <a class="btn btn-warning" href="{{url_for('edit_product', store_name=product.store.name, product_name=product.productName)}}">edit</a>
+                        <a class="btn btn-danger" href="{{url_for('delete_product', store_name=product.store.name, product_name=product.productName)}}">delete</a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            </div>
+        {% else %}
+            <br><h5>no ptoducts here</h5>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

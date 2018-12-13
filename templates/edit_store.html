@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit Store | Page
+{% endblock title %}
+{% block content %}
+{% include "nav.html" %}
+<div class="container">
+    <form class="form-group" action="{{url_for('edit_store', store_name=store.name)}}" method="POST">
+        <input class="form-control" type="text" name="name" placeholder="Enter New Store" value="{{store.name}}">
+        <br>
+        <input class="form-control" type="text" name="description" placeholder="description" value="{{store.description}}">
+        <br>
+        <input class="form-control" type="text" name="adress" placeholder="Enter Address" value="{{store.address}}">
+        <br>
+        <input class="form-control" type="text" name="picture" placeholder="Enter url od picture" value="{{store.picture}}">
+        <br>
+        <input class="btn btn-warning" type="submit" value="Edit">
+        <a class="btn btn-light" href="{{url_for('store')}}">Cancel</a>
+    </form>
+</div>
+{% endblock content %}
