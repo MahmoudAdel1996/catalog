@@ -32,7 +32,7 @@ APPLICATION_NAME = "Store Product Application"
 
 
 # Connect to Database and create database session
-engine = create_engine('postgresql://catalog:123456@localhost/catalog')
+engine = create_engine('sqlite:///products.db')
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
