@@ -30,7 +30,6 @@ $ `python views.py`
 ## Preview (ScreenShot)
 
 Store Page
-http://localhost:8000
 ![Store Page](screenshot/Store_Page.png)
 
 Product Page
